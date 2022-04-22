@@ -44,7 +44,7 @@ And an application for consuming the API
 
 - How to apply the repository pattern infront of a controller. 
 - The benefits of decoupling your data acces layers and business layers.
-- Researching design patterns and filtering between quality information and less-quality information.
+- Researching design patterns and the history of how modern APIs are structured
 - Different ways to handle time in SQL
 
 
