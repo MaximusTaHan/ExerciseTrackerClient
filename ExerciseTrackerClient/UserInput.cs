@@ -51,10 +51,18 @@ internal class UserInput
         WorkoutVizualiserService.ShowWorkout(workoutList);
 
         Console.WriteLine("Which workout would you like to Look at?");
-        int id = InputValidationService.IdValidation(workoutList);
+        string input = Console.ReadLine();
 
-        if(id == -1)
+        while (!InputValidationService.IdValidation(workoutList, input))
+        {
+            Console.WriteLine("Could not find a matching ID, Try again");
+            input = Console.ReadLine();
+        }
+
+        if (input == "return")
             return;
+
+        int id = int.Parse(input);
 
         Workout workout = WorkoutController.GetWorkoutById(id);
         WorkoutDTO workoutDTO = new()
@@ -75,10 +83,18 @@ internal class UserInput
         WorkoutVizualiserService.ShowWorkout(workoutList);
 
         Console.WriteLine("Which workout would you like to Update?");
-        int id = InputValidationService.IdValidation(workoutList);
+        string input = Console.ReadLine();
 
-        if (id == -1)
+        while (!InputValidationService.IdValidation(workoutList, input))
+        {
+            Console.WriteLine("Could not find a matching ID, Try again");
+            input = Console.ReadLine();
+        }
+
+        if (input == "return")
             return;
+
+        int id = int.Parse(input);
 
         Workout updatedWorkout = CreateWorkoutService.newWorkout();
 
@@ -103,7 +119,18 @@ internal class UserInput
         WorkoutVizualiserService.ShowWorkout(workoutList);
 
         Console.WriteLine("Which workout would you like to Delete?");
-        int id = InputValidationService.IdValidation(workoutList);
+        string input = Console.ReadLine();
+
+        while (!InputValidationService.IdValidation(workoutList, input))
+        {
+            Console.WriteLine("Could not find a matching ID, Try again");
+            input = Console.ReadLine();
+        }
+
+        if (input == "return")
+            return;
+
+        int id = int.Parse(input);
 
         WorkoutController.RemoveWorkout(id);
     }

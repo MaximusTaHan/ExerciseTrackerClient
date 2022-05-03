@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 internal class WorkoutController
 {
-    private static readonly string connectionString = "https://localhost:7271/api/Workouts";
+    private static readonly string connectionString = "https://localhost:5001/api/Workouts";
     internal static List<Workout> GetWorkouts()
     {
         using var client = new HttpClient();

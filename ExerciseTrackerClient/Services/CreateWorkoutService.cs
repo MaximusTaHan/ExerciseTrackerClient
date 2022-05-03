@@ -12,12 +12,32 @@ internal class CreateWorkoutService
         string comment;
 
         Console.WriteLine("Write your start time (HH:mm)");
+        string input = Console.ReadLine();
 
-        start = InputValidationService.DateValidation();
+        while(!InputValidationService.DateValidation(input))
+        {
+            Console.WriteLine("Unrecogniseable format (HH:mm). Try again");
+            input = Console.ReadLine();
+        }
+
+        if (input == "return")
+            return null;
+
+        start = DateTime.Parse(DateTime.Now.ToShortDateString() + " " + input);
 
         Console.WriteLine("Write your end time (HH:mm)");
+        input = Console.ReadLine();
 
-        end = InputValidationService.DateValidation();
+        while (!InputValidationService.DateValidation(input))
+        {
+            Console.WriteLine("Unrecogniseable format (HH:mm). Try again");
+            input = Console.ReadLine();
+        }
+
+        if (input == "return")
+            return null;
+
+        end = DateTime.Parse(DateTime.Now.ToShortDateString() + " " + input);
 
         timeSpan = end - start;
         duration = timeSpan.Ticks;
