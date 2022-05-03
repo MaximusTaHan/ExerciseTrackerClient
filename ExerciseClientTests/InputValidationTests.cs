@@ -54,7 +54,11 @@ namespace ExerciseClientTests
 
             Assert.IsFalse(emptyCheck);
         }
+    }
 
+    [TestClass]
+    public class DateValidationTests
+    {
         [TestMethod]
         public void DateValidation_ValidInput_OutDateFormatTrue()
         {
