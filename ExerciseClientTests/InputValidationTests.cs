@@ -10,49 +10,61 @@ namespace ExerciseClientTests
         [TestMethod]
         public void IdValidation_ValidInput_OutIdMatchTrue()
         {
-            List<Workout> mockList = new();
-            mockList.Add(new Workout() { WorkoutsId = 1 });
+            // Arrange
+            List<Workout> exampleWorkouts = new();
             string id = "1";
+            exampleWorkouts.Add(new Workout() { WorkoutsId = int.Parse(id) });
 
-            bool idOut = InputValidationService.IdValidation(mockList, id);
+            // Act
+            bool isValid = InputValidationService.IdValidation(exampleWorkouts, id);
 
-            Assert.IsTrue(idOut);
+            // Assert
+            Assert.IsTrue(isValid, "Input and Id is a match but method does not return True");
         }
 
         [TestMethod]
-        public void IdValidation_ValidInput_OutGuardTrue()
+        public void IdValidation_ValidInput_OutGuardClauseTrue()
         {
-            List<Workout> mockList = new();
-            mockList.Add(new Workout() { WorkoutsId = 1 });
+            // Arrange
+            List<Workout> exampleWorkouts = new();
+            exampleWorkouts.Add(new Workout() { WorkoutsId = 1 });
             string guard = "return";
 
-            bool guardOut = InputValidationService.IdValidation(mockList, guard);
-
-            Assert.IsTrue(guardOut);
+            // Act
+            bool guardIsValid = InputValidationService.IdValidation(exampleWorkouts, guard);
+            
+            // Assert
+            Assert.IsTrue(guardIsValid, "Return string is correct but method does not return True");
         }
 
         [TestMethod]
         public void IdValidation_InvalidId_OutIdMatchFalse()
         {
-            List<Workout> mockList = new();
-            mockList.Add(new Workout(){ WorkoutsId = 1 });
+            // Arrange
+            List<Workout> exampleWorkouts = new();
             string invalidNum = "2";
+            exampleWorkouts.Add(new Workout(){ WorkoutsId = 1 });
 
-            bool invalidNumCheck = InputValidationService.IdValidation(mockList, invalidNum);
+            // Act
+            bool inputNumIsInvalid = InputValidationService.IdValidation(exampleWorkouts, invalidNum);
 
-            Assert.IsFalse(invalidNumCheck);
+            // Assert
+            Assert.IsFalse(inputNumIsInvalid, "Input and Id is not a match but does not return False");
         }
 
         [TestMethod]
         public void IdValidation_InvalidInput_OutIdMatchFalse()
         {
-            List<Workout> mockList = new();
-            mockList.Add(new Workout() { WorkoutsId = 1 });
+            // Arrange
+            List<Workout> exampleWorkouts = new();
             string empty = "";
+            exampleWorkouts.Add(new Workout() { WorkoutsId = 1 });
 
-            bool emptyCheck = InputValidationService.IdValidation(mockList, empty);
+            // Act
+            bool stringInputIsInvalid = InputValidationService.IdValidation(exampleWorkouts, empty);
 
-            Assert.IsFalse(emptyCheck);
+            // Assert
+            Assert.IsFalse(stringInputIsInvalid, "Input is not a valid number but does not return False");
         }
     }
 
@@ -62,31 +74,40 @@ namespace ExerciseClientTests
         [TestMethod]
         public void DateValidation_ValidInput_OutDateFormatTrue()
         {
+            // Arrange
             string input = "10:40";
 
+            // Act
             bool validFormat = InputValidationService.DateValidation(input);
 
-            Assert.IsTrue(validFormat);
+            // Assert
+            Assert.IsTrue(validFormat, "Input is correct but does not return True");
         }
 
         [TestMethod]
         public void DateValidation_ValidGuard_OutGuardTrue()
         {
+            // Arrange
             string input = "return";
 
+            // Act
             bool validGuard = InputValidationService.DateValidation(input);
 
-            Assert.IsTrue(validGuard);
+            // Assert
+            Assert.IsTrue(validGuard, "Guard statement is correct but does not return True");
         }
 
         [TestMethod]
         public void DateValidation_InvalidInput_OutDateFormatFalse()
         {
+            // Arrange
             string input = "!0:00";
 
+            // Act
             bool validFormat = InputValidationService.DateValidation(input);
 
-            Assert.IsFalse(validFormat);
+            // Assert
+            Assert.IsFalse(validFormat, "Input format is not correct but does not return False");
         }
     }
 }
